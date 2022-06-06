@@ -1,0 +1,157 @@
+{% extends 'mainapp/basic.html' %}
+{% load static %}
+{% block title %}
+StockPicker
+{% endblock %}
+{% block css %}
+<style>
+    .form-group {
+        padding: 5px 5px 5px 5px;
+      }
+    .row{
+        vertical-align:bottom;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="card mt-5">
+        <div class="card-body">
+          <div class="card-title py-3">
+            <h4>{{selectedstock.stock}}</h4>
+          </div>
+          <form action="{% url 'stockdetail' %}" method="post">
+            {% csrf_token %}
+            {% include 'partials/_messages.html' %}
+            <div class="form-group">
+              <input
+                type="text"
+                name="stockname"
+                placeholder="stockticker"
+                id="stocknameField"
+                value="{{detailstock}}"
+                class="form-control form-control-sm"
+                readonly
+              />
+            </div>
+            <div class="form-group">
+                <input
+                type="text"
+                name="price"
+                placeholder="price"
+                id="{{detailstock}}_price"
+                value="{{temp_price_quote}}"
+                class="form-control form-control-sm"
+                readonly
+              />
+            </div>
+  
+            <div class="form-group">
+
+                <input
+                type="text"
+                name="quantity"
+                placeholder="quantity"
+                id="quantityField"
+                value="{{fieldValues.quantity}}"
+                class="form-control form-control-sm"
+              />
+            </div>
+          
+            <div class="form-group">
+              lockindate
+              <input
+                type="date"
+                name="lockindate"
+                placeholder="lockinperiod"
+                id="lockindateField"
+                value=""
+                class="form-control form-control-sm"
+               
+              />
+            </div>
+            <input type="submit" value="Buy" class="btn btn-block btn-success submit-btn" />
+            
+          </form>
+  
+        </div>
+  
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <br>  
+  <div class="container">
+    <h3 class="text-center"><u>{{detailstock}} Balance Sheet</u></h3>          
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>Parameters</th>
+          <th>2022-03-31</th>
+          <th>2021-03-31</th>
+          <th>2020-03-31</th>
+          <th>2019-03-31</th>
+        </tr>
+      </thead>
+      <tbody>
+      <!-- jinja2 Technique -->
+      {% if d %}  
+      {% for i in d %}
+        <tr>
+          <td>{{i.Breakdown}}</td>
+          <td>{{i.1648684800000}}</td>
+          <td>{{i.1617148800000}}</td>
+          <td>{{i.1585612800000}}</td>
+          <td>{{i.1553990400000}}</td>
+        </tr>
+      {% endfor %}
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+  {{ room_name|json_script:"room-name" }}
+<script>
+  const roomName = JSON.parse(document.getElementById('room-name').textContent);
+  var queryString = window.location.search;
+  queryString = queryString.substring(1);
+  console.log(queryString);
+  const stockSocket = new WebSocket(
+    'ws://' +
+    window.location.host +
+    '/ws/stock/' +
+    roomName +
+    '/' +
+    '?' +
+    queryString
+  );
+
+  stockSocket.onmessage = function (e){
+    console.log(e.data);
+    const data = JSON.parse(e.data);
+    console.log(data);
+    for (const [key, value] of Object.entries(data)) {
+      var price = Number((value['Quote Price']).toFixed(4));
+      var prevprice = Number((value['Previous Close']).toFixed(4));
+      document.getElementById(key + '_price').value = price;
+      
+      /*var change = document.getElementById(key + '_price').innerHTML - document.getElementById(key + '_prevprice')
+        .innerHTML;
+      change = Number((change).toFixed(4));
+      if (change > 0) {
+        document.getElementById(key + '_change').className = "green";
+        document.getElementById(key + '_change').innerHTML = "+" + change;
+      } else if (change < 0) {
+        document.getElementById(key + '_change').className = "red";
+        document.getElementById(key + '_change').innerHTML = change;
+      }*/
+    }
+  };
+  document.getElementById('buydateField').valueAsDate = new Date();
+</script>
+{% endblock %}
+{% block js %}
+
+{% endblock %}

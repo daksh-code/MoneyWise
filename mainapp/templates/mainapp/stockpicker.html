@@ -13,7 +13,7 @@ StockPicker
     <p>Select your favourite stocks.</p>
     <form action="/stocktracker">
         <label for="stockpicker">Select Stocks:</label>
-        <select class="form-select form-select-lg mb-3" multiple aria-label="multiple select example"
+        <select class="form-select form-select-lg mb-5" multiple aria-label="multiple select example"
             name="stockpicker">
             {% for i in stockpicker %}
             <option value="{{i}}">{{i}}</option>

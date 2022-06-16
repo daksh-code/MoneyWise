@@ -11,4 +11,5 @@ urlpatterns = [
          name="validate-username"),
     path('validate-email', csrf_exempt(EmailValidationView.as_view()),
          name='validate_email'),
+         
 ]

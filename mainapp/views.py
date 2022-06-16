@@ -115,7 +115,6 @@ def stockDetail(request):
         quantity=request.POST['quantity']
         lockindate=request.POST['lockindate']
         price=request.POST['price']
-     
         
         print(lockindate)
         UserPortfolio.objects.create(price=price,quantity=quantity,lockindate=lockindate,owner=request.user,
@@ -166,7 +165,6 @@ def schedule_mail(request):
     schedule2, created = CrontabSchedule.objects.get_or_create(hour = 15, minute = 30)
     task1 ,created= PeriodicTask.objects.get_or_create(crontab=schedule1, name="schedule_mail_task_at "+"9:15", task='send_mail_app.tasks.send_mail_func')#, args = json.dumps([list(lockinends)],default=str))
     task2 ,created= PeriodicTask.objects.get_or_create(crontab=schedule2, name="schedule_mail_task_at "+"3:30", task='send_mail_app.tasks.send_mail_func_portfolio')
-    
 
     return HttpResponse("Done")
 

@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('authentication/', include('authentication.urls')),
     path('', include('mainapp.urls')),
+    path('brokerprofile/',include('userpreferences.urls')),
 ]
 

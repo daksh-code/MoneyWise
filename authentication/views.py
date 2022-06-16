@@ -19,7 +19,7 @@ from django.template.loader import render_to_string
 from .utils import account_activation_token
 from django.urls import reverse
 from django.contrib import auth
-
+from stockproject import settings
 # Create your views here.
 
 class EmailValidationView(View):
@@ -70,6 +70,17 @@ class RegistrationView(View):
                 user.set_password(password)
                 user.is_active = True
                 user.save()
+                mail_subject = f"MoneyWise"
+                message = "Welcome to MoneyWise"
+                to_email = user.email
+                print(user)
+                send_mail(
+                        subject = mail_subject,
+                        message=message,
+                        from_email=settings.EMAIL_HOST_USER,
+                        recipient_list=[to_email],
+                        fail_silently=False,
+                    )
                 messages.success(request, 'Account successfully created')
                 return render(request, 'authentication/login.html')
 

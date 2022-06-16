@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'channels',
     'authentication',
     'portfolio',
-    'send_mail_app'
+    'send_mail_app',
+    'userpreferences'
     
 ]
 

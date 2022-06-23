@@ -1,0 +1,2 @@
+celery -A stockproject.celery worker --pool=solo -l info
+celery -A stockproject beat -l INFO 

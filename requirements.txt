@@ -57,7 +57,7 @@ jsonschema==2.6.0
 kombu==5.2.4
 lxml==4.8.0
 msgpack==1.0.3
-numpy==1.22.3
+numpy==1.23.0
 pandas==1.4.2
 paramiko==2.11.0
 parse==1.19.0
@@ -73,7 +73,7 @@ pyppeteer==1.0.2
 pyquery==1.4.3
 pyrsistent==0.18.1
 python-crontab==2.6.0
-python-dateutil==2.8.0
+python-dateutil==2.8.1
 pytz==2022.1
 PyYAML==5.4.1
 redis==3.5.3

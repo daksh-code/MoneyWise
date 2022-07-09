@@ -86,17 +86,19 @@ ASGI_APPLICATION = "stockproject.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'moneywise',
+        'USER': 'daksh101',
+        'PASSWORD': 'daksh1001',
+        'HOST': 'database.cdwilno2nwew.us-west-2.rds.amazonaws.com',
+        'PORT': '5432',
         }
     }
+
+"""
 else:
     DATABASES = {
         'default': {
@@ -108,6 +110,7 @@ else:
             'PORT': '5432',
         }
     }
+"""
 
 
 

@@ -82,7 +82,6 @@ class StockConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code):
         await self.helper_func()
-
         # Leave room group
         await self.channel_layer.group_discard(
             self.room_group_name,
@@ -93,7 +92,7 @@ class StockConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
-        
+
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,

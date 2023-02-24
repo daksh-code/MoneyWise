@@ -9,7 +9,6 @@ from datetime import date
 def send_mail_func(self):
     
     lockinends=UserPortfolio.objects.all()
-    
 
     #dateportfolio=UserPortfolio.objects.filter(date=date.today())
     #timezone.localtime(users.date_time) + timedelta(days=2)
@@ -27,7 +26,7 @@ def send_mail_func(self):
             fail_silently=False,
         )
     return "Done"
-
+    
 @shared_task(bind=True)
 def send_mail_func_portfolio(self):
     #timezone.localtime(users.date_time) + timedelta(days=2)

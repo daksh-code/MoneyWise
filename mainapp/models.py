@@ -7,6 +7,7 @@ class StockDetail(models.Model):
     stock = models.CharField(max_length=255, unique=True)
     user = models.ManyToManyField(User)
 
+
 from django.utils.timezone import now
 # Create your models here.
 

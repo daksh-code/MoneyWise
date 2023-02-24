@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-peh2@#pv&ntvvsjnv-#6r-#9%h(mevg6lkoi1j%q91wxidilk)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0','*']
 
 
 # Application definition
@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'authentication',
     'portfolio',
     'send_mail_app',
-    'userpreferences'
-    
+    'userpreferences',
 ]
 
 MIDDLEWARE = [
@@ -89,14 +88,10 @@ ASGI_APPLICATION = "stockproject.asgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'moneywise',
-        'USER': 'daksh101',
-        'PASSWORD': 'daksh1001',
-        'HOST': 'database.cdwilno2nwew.us-west-2.rds.amazonaws.com',
-        'PORT': '5432',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
+}
 
 """
 else:
@@ -173,14 +168,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CELERY_BROKER_URL = os.environ['REDIS_URL'] #heroku
-CELERY_BROKER_URL='redis://127.0.0.1:6379' #original
+#CELERY_BROKER_URL='redis://127.0.0.1:6379' #original
+CELERY_BROKER_URL = 'redis://db:6379/0'
 CELERY_ACCEPT_CONTENT=['application/json']
 CELERY_RESULT_SERIALIZER='json'
 CELERY_TASK_SERIALIZER='json'
 CELERY_TIMEZONE='Asia/Kolkata'
-FIRST_RESULT_BACKEND='django-db'
+#FIRST_RESULT_BACKEND='django-db'
 CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler'
-
+CELERY_RESULT_BACKEND = 'redis://db:6379/0'
 #origial
 
 CHANNEL_LAYERS = {
@@ -214,3 +210,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER ='dagariyadaksh@gmail.com'
 EMAIL_HOST_PASSWORD = "xzjxdvuhsqtmhydm"
 DEFAULT_FROM_EMAIL = 'Celery <dagariyadaksh@gmail.com>'
+
+
+
+

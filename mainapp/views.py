@@ -142,7 +142,7 @@ def stockPortfolios(request):
             finalrep[y]=get_category_amount(y)
     print(finalrep)
     return JsonResponse({"stock_user_data":finalrep},safe=False)
-        
+
 def portfolio_view(request):
     portfolio=UserPortfolio.objects.filter(owner=request.user)
     print(date.today())
@@ -154,7 +154,6 @@ def delete_stock(request,id):
     deleteme.delete()
     return redirect('stockportfolio')
 
-
 def send_mail_to_all(request):
     send_mail_func.delay()
     return HttpResponse("Sent")
@@ -163,7 +162,7 @@ def send_mail_to_all(request):
 def schedule_mail(request):
     schedule1, created = CrontabSchedule.objects.get_or_create(hour = 9, minute = 15)
     schedule2, created = CrontabSchedule.objects.get_or_create(hour = 15, minute = 30)
-    task1 ,created= PeriodicTask.objects.get_or_create(crontab=schedule1, name="schedule_mail_task_at "+"9:15", task='send_mail_app.tasks.send_mail_func')#, args = json.dumps([list(lockinends)],default=str))
+    task1 ,created= PeriodicTask.objects.get_or_create(crontab=schedule1, name="schedule_mail_task_at "+"9:15", task='send_mail_app.tasks.send_mail_func') #, args = json.dumps([list(lockinends)],default=str))
     task2 ,created= PeriodicTask.objects.get_or_create(crontab=schedule2, name="schedule_mail_task_at "+"3:30", task='send_mail_app.tasks.send_mail_func_portfolio')
 
     return HttpResponse("Done")

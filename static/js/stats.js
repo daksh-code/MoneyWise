@@ -49,7 +49,6 @@ const getChartData = () => {
         Object.keys(category_data),
         Object.values(category_data),
       ];
-
       renderChart(data, labels);
     });
 };

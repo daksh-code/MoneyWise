@@ -17,7 +17,6 @@ def update_stock(self, stockpicker):
             pass
         else:
             stockpicker.remove(i)
-    
     n_threads = len(stockpicker)
     thread_list = []
     que = queue.Queue()

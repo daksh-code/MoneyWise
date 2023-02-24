@@ -59,7 +59,7 @@ class RegistrationView(View):
         context = {
             'fieldValues': request.POST
         }
-
+        
         if not User.objects.filter(username=username).exists():
             if not User.objects.filter(email=email).exists():
                 if len(password) < 6:

@@ -8,6 +8,7 @@ attrs==21.4.0
 autobahn==22.3.2
 Automat==20.2.0
 awsebcli==3.20.3
+Babel==2.11.0
 bcrypt==3.2.2
 beautifulsoup4==4.11.1
 billiard==3.6.4.0
@@ -16,6 +17,7 @@ botocore==1.23.54
 bs4==0.0.1
 cached-property==1.5.2
 celery==5.0.5
+celery-flower==1.0.1
 cement==2.8.2
 certifi==2021.10.8
 cffi==1.15.0
@@ -46,8 +48,10 @@ docutils==0.15.2
 fake-useragent==0.1.11
 feedparser==6.0.8
 future==0.16.0
+gunicorn==20.1.0
 hiredis==2.0.0
 html5lib==1.1
+humanize==4.4.0
 hyperlink==21.0.0
 idna==2.7
 importlib-metadata==4.11.3
@@ -62,7 +66,9 @@ pandas==1.4.2
 paramiko==2.11.0
 parse==1.19.0
 pathspec==0.9.0
+prometheus-client==0.16.0
 prompt-toolkit==3.0.29
+psycopg2==2.9.3
 psycopg2-binary==2.9.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
@@ -89,6 +95,7 @@ soupsieve==2.3.2.post1
 sqlparse==0.4.2
 termcolor==1.1.0
 texttable==0.9.1
+tornado==6.2
 tqdm==4.64.0
 Twisted==22.4.0
 txaio==22.2.1

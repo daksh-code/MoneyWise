@@ -74,6 +74,7 @@ class RegistrationView(View):
                 message = "Welcome to MoneyWise"
                 to_email = user.email
                 print(user)
+                """
                 send_mail(
                         subject = mail_subject,
                         message=message,
@@ -81,6 +82,7 @@ class RegistrationView(View):
                         recipient_list=[to_email],
                         fail_silently=False,
                     )
+                """
                 messages.success(request, 'Account successfully created')
                 return render(request, 'authentication/login.html')
 

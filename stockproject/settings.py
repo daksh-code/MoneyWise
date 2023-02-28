@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'portfolio',
     'send_mail_app',
     'userpreferences',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +87,7 @@ ASGI_APPLICATION = "stockproject.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -97,15 +98,15 @@ DATABASES = {
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'User_Data',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': '     ',
-        'HOST': 'localhost',
+        'PASSWORD': 'new_password',
+        'HOST': 'pgdb',
         'PORT': '5432',
     }
 }
-"""
+
 
 
 """
@@ -176,23 +177,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")   #for docker
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0") #for docker
+
 # CELERY_BROKER_URL = os.environ['REDIS_URL'] #heroku
 #CELERY_BROKER_URL='redis://127.0.0.1:6379' #original
-CELERY_BROKER_URL = 'redis://db:6379/0'
+#CELERY_BROKER_URL='redis://redis:6379' #original
+#CELERY_RESULT_BACKEND='django-db'
+#CELERY_BROKER_URL = 'redis://db:6379/0'
 CELERY_ACCEPT_CONTENT=['application/json']
 CELERY_RESULT_SERIALIZER='json'
 CELERY_TASK_SERIALIZER='json'
 CELERY_TIMEZONE='Asia/Kolkata'
 #FIRST_RESULT_BACKEND='django-db'
 CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler'
-CELERY_RESULT_BACKEND = 'redis://db:6379/0'
+#
 #origial
-
+""""""
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('redis', 6379)],
         },
     },
 }

@@ -95,7 +95,7 @@ def stockDetail(request):
         balance_sheet = que.get()
         temp_price_quote = que.get()
         temp_price_quote=temp_price_quote["Quote Price"]
-        
+        print(get_balance_sheet('BAJAJFINSV.NS'))
         print(balance_sheet.columns)
         #balance_sheet.columns = ['Parameter', '2022-03-31', '2021-03-31', '2020-03-31','2019-03-31']
         print(balance_sheet)
